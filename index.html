@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Procesamiento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        .equation-container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        img {
+            margin-bottom: 40px;
+
+            max-width: 100%;
+            height: auto;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        canvas {
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Página de Procesamiento</h1>
+    <p>Nombre Completo: Anderson David Angulo Angulo</p>
+    <p>Código: 2116651</p>
+    <p>Nombre Completo: Luis Ferney Castaño Dagua</p>
+    <p>Código: 2116626</p>
+    <div class="content">
+        <!-- Contenedor para la imagen y el botón -->
+        <div class="equation-container">
+            <!-- Ecuación como imagen PNG -->
+            <img src="https://latex.codecogs.com/png.latex?f%28x%29%20%3D%20%5Cfrac%7Ba%5E2%20%2B%20b%5E2%7D%7B%5Csqrt%7Bc%20%2B%20d%7D%7D%20-%20%5Clog%28e%20%5Ccdot%20f%29%20%2B%20%5Csin%28g%20-%20h%29"
+                alt="Ecuación" />
+        </div>
+        <!-- Botón para procesar -->
+        <button onclick="process()">Procesar</button>
+    </div>
+
+    <!-- Tabla de resultados -->
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Tipo de Error</th>
+                <th>Total de Errores</th>
+                <th>Porcentaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Errores de Arcoseno</td>
+                <td id="totalAsinErrors">0</td>
+                <td id="percentAsinErrors">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de Arcocoseno</td>
+                <td id="totalAcosErrors">0</td>
+                <td id="percentAcosErrors">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de Raíz Cuadrada</td>
+                <td id="totalSqrtErrors">0</td>
+                <td id="percentSqrtErrors">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de División</td>
+                <td id="totalDivisionErrors">0</td>
+                <td id="percentDivisionErrors">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de Logaritmo Natural</td>
+                <td id="totalLogErrors">0</td>
+                <td id="percentLogErrors">0%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Gráfico de pastel -->
+    <canvas id="pieChart" width="400" height="200"></canvas>
+
+    <script>
+        function process() {
+            let totalAsinErrors = 0;
+            let totalAcosErrors = 0;
+            let totalSqrtErrors = 0;
+            let totalDivisionErrors = 0;
+            let totalLogErrors = 0;
+
+            for (let i = 0; i < 1000; i++) {
+                // Generar valores aleatorios para las variables
+                let a = Math.random() * 2 - 1;
+                let b = Math.random() * 2 - 1;
+                let c = Math.random() * 2 - 1;
+                let d = Math.random() * 2 - 1;
+                let p = Math.random() * 2 - 1;
+                let e = Math.random() * 2 - 1;
+                let g = Math.random() * 2 - 1;
+                let u = Math.random() * 2 - 1;
+                let i = Math.random() * 2 - 1;
+                let h = Math.random() * 2 - 1;
+                let k = Math.random() * 2 - 1;
+
+                // Evaluar la ecuación y contar errores
+                try {
+                    if (Math.abs(a - b) > 1) throw new Error("Error de arcoseno");
+                    Math.acos(a - b);
+                } catch (e) { totalAcosErrors++; }
+
+                try {
+                    if (Math.abs(b * b - Math.sqrt(c) - d) > 1) throw new Error("Error de arcoseno");
+                    Math.asin(b * b - Math.sqrt(c) - d);
+                } catch (e) { totalAsinErrors++; }
+
+                try {
+                    if (p <= 0) throw new Error("Error de logaritmo natural");
+                    Math.log(p);
+                } catch (e) { totalLogErrors++; }
+
+                try {
+                    if (Math.abs(e) < 0.001) throw new Error("Error de división");
+                    (d / e) * (Math.sqrt(d - g));
+                } catch (e) { totalDivisionErrors++; }
+
+                try {
+                    if (u - i <= 0) throw new Error("Error de logaritmo natural");
+                    Math.log(u - i);
+                } catch (e) { totalLogErrors++; }
+
+                try {
+                    if (Math.abs(h - (i / k)) > 1) throw new Error("Error de arcoseno");
+                    Math.acos(h - (i / k));
+                } catch (e) { totalAcosErrors++; }
+
+                try {
+                    if (d <= 0 || e <= 0) throw new Error("Error de logaritmo natural");
+                    Math.log(d / e + Math.sqrt(d - g));
+                } catch (e) { totalLogErrors++; }
+
+                try {
+                    if (a <= 0) throw new Error("Error de raíz cuadrada");
+                    Math.sqrt(a);
+                } catch (e) { totalSqrtErrors++; }
+            }
+
+            // Actualizar la tabla
+            document.getElementById("totalAsinErrors").textContent = totalAsinErrors;
+            document.getElementById("percentAsinErrors").textContent = (totalAsinErrors / 1000 * 100).toFixed(2) + "%";
+
+            document.getElementById("totalAcosErrors").textContent = totalAcosErrors;
+            document.getElementById("percentAcosErrors").textContent = (totalAcosErrors / 1000 * 100).toFixed(2) + "%";
+
+            document.getElementById("totalSqrtErrors").textContent = totalSqrtErrors;
+            document.getElementById("percentSqrtErrors").textContent = (totalSqrtErrors / 1000 * 100).toFixed(2) + "%";
+
+            document.getElementById("totalDivisionErrors").textContent = totalDivisionErrors;
+            document.getElementById("percentDivisionErrors").textContent = (totalDivisionErrors / 1000 * 100).toFixed(2) + "%";
+
+            document.getElementById("totalLogErrors").textContent = totalLogErrors;
+            document.getElementById("percentLogErrors").textContent = (totalLogErrors / 1000 * 100).toFixed(2) + "%";
+
+            // Graficar los resultados
+            new Chart(document.getElementById('pieChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['Errores de Arcoseno', 'Errores de Arcocoseno', 'Errores de Raíz Cuadrada', 'Errores de División', 'Errores de Logaritmo Natural'],
+                    datasets: [{
+                        data: [totalAsinErrors, totalAcosErrors, totalSqrtErrors, totalDivisionErrors, totalLogErrors],
+                        backgroundColor: ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0']
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
